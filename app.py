@@ -10,19 +10,16 @@ from src.utils import (
     get_recommendation
 )
 
-# --------------------------------------------------
 # PAGE CONFIG
-# --------------------------------------------------
+
 
 st.set_page_config(
     page_title="DriverGuard AI",
-    page_icon="🚗",
+    page_icon=" ",
     layout="wide"
 )
 
-# --------------------------------------------------
-# CUSTOM CSS
-# --------------------------------------------------
+
 
 st.markdown("""
 <style>
@@ -49,17 +46,16 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# --------------------------------------------------
-# SIDEBAR
-# --------------------------------------------------
 
-st.sidebar.title("🚗 DriverGuard AI")
+
+
+st.sidebar.title(" DriverGuard AI")
 
 st.sidebar.markdown("---")
 
 st.sidebar.success("🟢 Camera Connected")
 
-st.sidebar.info("🤖 Fatigue Model Loaded")
+st.sidebar.info(" Fatigue Model Loaded")
 
 st.sidebar.markdown("---")
 
@@ -67,9 +63,7 @@ st.sidebar.write("Version 1.0")
 
 st.sidebar.write("AI Internship Project")
 
-# --------------------------------------------------
-# HEADER
-# --------------------------------------------------
+
 
 st.markdown(
     '<div class="big-title">🚗 DriverGuard AI</div>',
@@ -83,15 +77,10 @@ st.markdown(
 
 st.divider()
 
-# --------------------------------------------------
-# MODEL
-# --------------------------------------------------
+
 
 model = joblib.load("models/fatigue_model.pkl")
 
-# --------------------------------------------------
-# MEDIAPIPE
-# --------------------------------------------------
 
 mp_face_mesh = mp.solutions.face_mesh
 
@@ -102,9 +91,7 @@ face_mesh = mp_face_mesh.FaceMesh(
 
 LEFT_EYE = [33,160,158,133,153,144]
 
-# --------------------------------------------------
-# START BUTTON
-# --------------------------------------------------
+
 
 if st.button("▶ Start Monitoring"):
 
@@ -122,7 +109,7 @@ if st.button("▶ Start Monitoring"):
 
     st.divider()
 
-    # Bottom Metrics
+  
 
     e1,e2,e3,e4 = st.columns(4)
 
@@ -325,7 +312,7 @@ if st.button("▶ Start Monitoring"):
             )
 
             recommendation_placeholder.warning(
-                f"💡 {recommendation}"
+                f" {recommendation}"
             )
 
             cv2.putText(
