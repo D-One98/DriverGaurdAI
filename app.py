@@ -200,9 +200,11 @@ with left_col:
 # UI POLLING LOOP
 # ------------------------
 # This loop runs on the main Streamlit thread to update UI based on WebRTC data
-if ctx.state.playing and ctx.video_processor:
-    while ctx.state.playing:
+# 1. UI update karne ke liye ek alag function banao
+def update_ui(ctx):
+    if ctx.video_processor:
         with ctx.video_processor.lock:
+            # Data extract karo
             p_status = ctx.video_processor.status
             p_fatigue = ctx.video_processor.fatigue_score
             p_conf = ctx.video_processor.confidence
@@ -212,26 +214,22 @@ if ctx.state.playing and ctx.video_processor:
             p_perclos = ctx.video_processor.perclos
             p_rec = ctx.video_processor.recommendation
 
-        # Update Visuals
+        # Visuals Update karo
         color = "#163f25" if p_status == "ALERT" else "#5a1414"
         icon = "🟢" if p_status == "ALERT" else "🔴"
         
         status_placeholder.markdown(
-            f"""
-            <div style="background:{color}; padding:20px; border-radius:12px; text-align:center; color:white; font-size:28px; font-weight:bold;">
-            {icon} {p_status}
-            </div>
-            """, unsafe_allow_html=True
+            f'<div style="background:{color}; padding:20px; border-radius:12px; text-align:center; color:white; font-size:28px; font-weight:bold;">{icon} {p_status}</div>',
+            unsafe_allow_html=True
         )
-
         fatigue_placeholder.metric("Fatigue Score", f"{p_fatigue}%")
         confidence_placeholder.metric("Confidence", f"{p_conf}%")
         ear_placeholder.metric("EAR", f"{p_ear:.2f}")
         blink_placeholder.metric("Blink Rate", f"{p_blink:.1f}/min")
         closure_placeholder.metric("Eye Closure", f"{p_closure:.2f}s")
         perclos_placeholder.metric("PERCLOS", f"{p_perclos:.1f}%")
-        
         recommendation_placeholder.warning(p_rec)
 
-        # Small sleep to prevent UI freeze and high CPU usage
-        time.sleep(0.1)
+# 2. Streamlit mein bas itna check karo:
+if ctx.state.playing:
+    update_ui(ctx)
