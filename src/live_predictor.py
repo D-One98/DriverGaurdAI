@@ -4,11 +4,25 @@ import time
 import joblib
 from scipy.spatial import distance
 
+import os
+
+BASE_DIR = os.path.dirname(
+    os.path.dirname(
+        os.path.abspath(__file__)
+    )
+)
+
+MODEL_PATH = os.path.join(
+    BASE_DIR,
+    "models",
+    "fatigue_model.pkl"
+)
+
 
 # LOAD TRAINED MODEL
 
 
-model = joblib.load("models/fatigue_model.pkl")
+model = joblib.load("MODEL_PATH")
 
 # EAR FUNCTION
 
