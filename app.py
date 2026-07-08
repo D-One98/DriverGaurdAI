@@ -176,7 +176,15 @@ closure_placeholder = e3.empty()
 perclos_placeholder = e4.empty()
 recommendation_placeholder = st.empty()
 
-rtc_config = RTCConfiguration({"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]})
+rtc_config = RTCConfiguration({
+    "iceServers": [
+        {"urls": ["stun:stun.l.google.com:19302"]},
+        {"urls": ["stun:stun1.l.google.com:19302"]},
+        {"urls": ["stun:stun2.l.google.com:19302"]},
+        {"urls": ["stun:stun3.l.google.com:19302"]},
+        {"urls": ["stun:stun4.l.google.com:19302"]}
+    ]
+})
 
 with left_col:
     ctx = webrtc_streamer(
@@ -186,6 +194,7 @@ with left_col:
         video_processor_factory=FatigueVideoProcessor,
         media_stream_constraints={"video": True, "audio": False},
         async_processing=True
+        ice_restart=True
     )
 
 # ------------------------
