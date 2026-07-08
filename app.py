@@ -14,6 +14,9 @@ from src.utils import (
     get_recommendation
 )
 
+import socket
+socket.setdefaulttimeout(30)
+
 # ------------------------
 # PATHS & CONFIG
 # ------------------------
