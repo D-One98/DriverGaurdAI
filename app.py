@@ -194,7 +194,6 @@ with left_col:
         video_processor_factory=FatigueVideoProcessor,
         media_stream_constraints={"video": True, "audio": False},
         async_processing=True,
-        ice_restart=True
     )
 
 # ------------------------
