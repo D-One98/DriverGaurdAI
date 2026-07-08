@@ -193,7 +193,7 @@ with left_col:
         rtc_configuration=rtc_config,
         video_processor_factory=FatigueVideoProcessor,
         media_stream_constraints={"video": True, "audio": False},
-        async_processing=True,
+        async_processing=True
     )
 
 # ------------------------
